@@ -21,31 +21,58 @@ namespace ClassParam
         public int Life { get; set; }
         public int Kougeki { get; set; }
         public int Bougyo { get; set; }
+
+        // アイテムを保持
+        private List<Item> items = new List<Item>();
+        public void AddItem(Item item) { items.Add(item); }
+
+        // アイテムを使う
+        public void UseItem(int index)
+        {
+            items[index].Apply(this);
+            items.Remove(items[index]);
+        }
+
+        // ダンプ
         public override string ToString()
         {
-            return 
-                "Life:" + Life + "," +
-                "Kougeki:" + Kougeki + "," +
-                "Bougyo:" + Bougyo;
+            var sb = new StringBuilder();
+            sb.Append( "Life:" + Life + "," );
+            sb.Append( "Kougeki:" + Kougeki + "," );
+            sb.Append( "Bougyo:" + Bougyo + "\n" );
+
+            if (items.Any() ) {
+                sb.Append( "Items\n" );
+                foreach( var i in items ) {
+                    sb.Append( i.ToString() + "\n" );
+                }
+            }
+            return sb.ToString();
         }
+
+    }
+
+    // アイテム抽象
+    abstract class Item
+    {
+        public abstract void Apply(Human human);
     }
 
     // 回復アイテム
-    class KaifukuItem
+    class KaifukuItem : Item
     {
-        public void Apply(Human human) { human.Life += 100; }
+        public override void Apply(Human human) { human.Life += 100; }
     }
-
     // 攻撃力アップ
-    class KougekiItem
+    class KougekiItem : Item
     {
-        public void Apply(Human human) { human.Kougeki += 100; }
+        public override void Apply(Human human) { human.Kougeki += 100; }
     }
 
     // 防御力アップ
-    class BougyoItem
+    class BougyoItem : Item
     {
-        public void Apply(Human human) { human.Bougyo += 100; }
+        public override void Apply(Human human) { human.Bougyo += 100; }
     }
 
 
@@ -87,6 +114,34 @@ namespace ClassParam
                 item.Apply(human);
                 Log( human.ToString() );
             }
+
+            //アイテム取得
+            Log( "回復アイテム取得" );
+            human.AddItem(new KaifukuItem());//回復
+            Log( human.ToString() );
+
+            Log( "攻撃Upアイテム取得" );
+            human.AddItem(new KougekiItem());//
+            Log( human.ToString() );
+
+            Log( "防御Upアイテム取得" );
+            human.AddItem(new BougyoItem()); //防御
+            Log( human.ToString() );
+
+
+            Log( "回復薬を使う" );
+            human.UseItem(0);//
+            Log( human.ToString() );
+
+            Log( "攻撃薬を使う" );
+            human.UseItem(0);//
+            Log( human.ToString() );
+
+            Log( "防御薬を使う" );
+            human.UseItem(0);//
+            Log( human.ToString() );
+
+
         }
 
     }
