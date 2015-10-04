@@ -19,12 +19,12 @@ namespace ClassParam
     {
         static void Main(string[] args)
         {
-            Pattern01.App.Test();
-            Pattern02.App.Test();
-            Pattern03.App.Test();
-            Pattern04.App.Test();
-            Pattern05.App.Test();
-            Pattern06.App.Test();
+            Console.WriteLine( "Pattern01.App.Test" ); Pattern01.App.Test();
+            Console.WriteLine( "Pattern02.App.Test" ); Pattern02.App.Test();
+            Console.WriteLine( "Pattern03.App.Test" ); Pattern03.App.Test();
+            Console.WriteLine( "Pattern04.App.Test" ); Pattern04.App.Test();
+            Console.WriteLine( "Pattern05.App.Test" ); Pattern05.App.Test();
+            Console.WriteLine( "Pattern06.App.Test" ); Pattern06.App.Test();
         }
 
     }
