@@ -41,3 +41,9 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+*.suo
+ClassParam/bin/Debug/ClassParam.exe
+ClassParam/bin/Debug/ClassParam.exe.config
+*.pdb
+ClassParam/bin/
+ClassParam/obj/
