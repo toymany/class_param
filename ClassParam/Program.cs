@@ -15,16 +15,45 @@ using System.Threading.Tasks;
 
 namespace ClassParam
 {
+    // 人間
+    class Human
+    {
+        public int Life { get; set; }
+        public int Kougeki { get; set; }
+        public int Bougyo { get; set; }
+        public override string ToString()
+        {
+            return 
+                "Life:" + Life + "," +
+                "Kougeki:" + Kougeki + "," +
+                "Bougyo:" + Bougyo;
+        }
+    }
+
+    // 回復アイテム
+    class KaifukuItem
+    {
+        public void Apply(Human human) { human.Life += 100; }
+    }
+
+
+    // テスト
     class Program
     {
+        static void Log( string message )
+        {
+            Console.WriteLine( message );
+        }
         static void Main(string[] args)
         {
-            Console.WriteLine( "Pattern01.App.Test" ); Pattern01.App.Test();
-            Console.WriteLine( "Pattern02.App.Test" ); Pattern02.App.Test();
-            Console.WriteLine( "Pattern03.App.Test" ); Pattern03.App.Test();
-            Console.WriteLine( "Pattern04.App.Test" ); Pattern04.App.Test();
-            Console.WriteLine( "Pattern05.App.Test" ); Pattern05.App.Test();
-            Console.WriteLine( "Pattern06.App.Test" ); Pattern06.App.Test();
+            Log( "人間を生成" );
+            var human = new Human();
+            Log( human.ToString() );
+            Log( "回復アイテム生成" );
+            var kaifukuItem = new KaifukuItem();
+            Log( "回復アイテム使用" );
+            kaifukuItem.Apply(human);
+            Log( human.ToString() );
         }
 
     }
