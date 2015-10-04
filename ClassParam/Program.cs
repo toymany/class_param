@@ -36,6 +36,18 @@ namespace ClassParam
         public void Apply(Human human) { human.Life += 100; }
     }
 
+    // 攻撃力アップ
+    class KougekiItem
+    {
+        public void Apply(Human human) { human.Kougeki += 100; }
+    }
+
+    // 防御力アップ
+    class BougyoItem
+    {
+        public void Apply(Human human) { human.Bougyo += 100; }
+    }
+
 
     // テスト
     class Program
@@ -44,16 +56,37 @@ namespace ClassParam
         {
             Console.WriteLine( message );
         }
+
+
         static void Main(string[] args)
         {
             Log( "人間を生成" );
             var human = new Human();
             Log( human.ToString() );
-            Log( "回復アイテム生成" );
-            var kaifukuItem = new KaifukuItem();
-            Log( "回復アイテム使用" );
-            kaifukuItem.Apply(human);
-            Log( human.ToString() );
+
+            {
+                Log( "回復" );
+                var item = new KaifukuItem();
+                Log( item.ToString() + ".Apply" );
+                item.Apply(human);
+                Log( human.ToString() );
+            }
+
+            {
+                Log( "攻撃UP" );
+                var item = new KougekiItem();
+                Log( item.ToString() + ".Apply" );
+                item.Apply(human);
+                Log( human.ToString() );
+            }
+
+            {
+                Log( "防御UP" );
+                var item = new BougyoItem();
+                Log( item.ToString() + ".Apply" );
+                item.Apply(human);
+                Log( human.ToString() );
+            }
         }
 
     }
